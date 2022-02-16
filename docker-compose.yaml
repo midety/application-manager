@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  postgresdb:
+    image: postgres:14.1-alpine
+    container_name: postgresdb
+    env_file: .env
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+
+  back-end-nest:
+    container_name: back-end-nest
+    env_file: .env
+    build:
+      context: ./back-end-nest
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./back-end-nest/src:/app/src
+      - ./back-end-nest/migrations:/app/migrations
+    restart: unless-stopped
+    command: ['concurrently', 'npm:migration:run', 'npm:start:dev']
+    depends_on:
+      - postgresdb
+    ports:
+      - 3000:3000
