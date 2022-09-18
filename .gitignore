@@ -1,4 +1,6 @@
 .env
-back-end-nest
-back-end-express
+application-back-end-nest
+application-back-end-express
+application-front-end
+
 
