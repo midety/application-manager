@@ -20,8 +20,8 @@ services:
       context: ./back-end-nest
       dockerfile: Dockerfile.dev
     volumes:
-      - ./back-end-nest/src:/app/src
-      - ./back-end-nest/migrations:/app/migrations
+      - ./application-back-end-nest/src:/app/src
+      - ./application-back-end-nest/migrations:/app/migrations
     restart: unless-stopped
     command: ['concurrently', 'npm:migration:run', 'npm:start:dev']
     depends_on:
