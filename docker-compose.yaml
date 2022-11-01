@@ -17,7 +17,7 @@ services:
     container_name: back-end-nest
     env_file: .env
     build:
-      context: ./back-end-nest
+      context: ./application-back-end-nest
       dockerfile: Dockerfile.dev
     volumes:
       - ./application-back-end-nest/src:/app/src
